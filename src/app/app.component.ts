@@ -30,12 +30,12 @@ export class AppComponent implements OnInit {
     return this.todoForm.get('title');
   }
 
-  public get debut() {
-    return this.todoForm.get('debut');
+  public get beginDate() {
+    return this.todoForm.get('beginDate');
   }
 
-  public get fin() {
-    return this.todoForm.get('fin');
+  public get endDate() {
+    return this.todoForm.get('endDate');
   }
   /**
    * Méthode invoquée immédiatement après l'instanciation de l'objet
@@ -49,13 +49,13 @@ export class AppComponent implements OnInit {
           Validators.minLength(5)
         ]
       ],
-      debut: [
+      beginDate: [
         '',
         [
           Validators.required
         ]
       ],
-      fin: [
+      endDate: [
         '',
         [
           Validators.required
@@ -65,6 +65,11 @@ export class AppComponent implements OnInit {
   }
 
   public formSubmit(): void {
-    this._api.addTodo(this.todoForm.value);
+    this._api.addTodo(this.todoForm.value).subscribe(
+      (data) => {
+        this._api.sendTodo(new Todo().deserialize(data[0]));
+      }
+    );
+    
   }
 }

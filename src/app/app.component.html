@@ -1,9 +1,9 @@
 <div class="container">
-  <form class="form-inline" [formGroup]="todoForm" (ngSubmit)="formSubmit()">
+  <form class="container" [formGroup]="todoForm" (ngSubmit)="formSubmit()">
     <legend>A faire...</legend>
 
     <div class="form-group row">
-      <div class="col-md-6 pull-right">
+      <div class="col-md-4 pull-right">
         <label for="title">Titre : </label>
       </div>
       <div class="col-md-6">
@@ -26,37 +26,37 @@
     </div>
 
     <div class="form-group row">
-      <div class="col-md-6 pull-right">
-        <label for="debut">Début : </label>
+      <div class="col-md-4 pull-right">
+        <label for="beginDate">Début : </label>
       </div>
       <div class="col-md-6">
         <input
           class="form-control"
           type="date"
-          formControlName="debut"
-          id="debut"
+          formControlName="beginDate"
+          id="beginDate"
         >
       </div>
       <div class="alert alert-warning"
-        *ngIf="debut.invalid && debut.touched">
+        *ngIf="beginDate.invalid && beginDate.touched">
           La date de début ne peut pas être vide
       </div>
     </div>
 
     <div class="form-group row">
-      <div class="col-md-6 pull-right">
-        <label for="fin">Fin : </label>
+      <div class="col-md-4 pull-right">
+        <label for="endDate">Fin : </label>
       </div>
       <div class="col-md-6">
         <input
           class="form-control"
           type="date"
-          formControlName="fin"
-          id="fin"
+          formControlName="endDate"
+          id="endDate"
         >
       </div>
       <div class="alert alert-warning"
-        *ngIf="fin.invalid && fin.touched">
+        *ngIf="endDate.invalid && endDate.touched">
           La date de fin ne peut pas être vide
       </div>
     </div>

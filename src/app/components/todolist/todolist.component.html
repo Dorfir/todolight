@@ -1,13 +1,13 @@
 <table class="table table-condensed table-striped">
   <thead>
     <tr>
-      <th>A faire...</th>
+      <th>Liste des todos</th>
     </tr>
   </thead>
 
   <tbody>
     <tr *ngFor="let todo of todos">
-      <td>{{ todo.getTitle() }}</td>
+      <td>{{ todo.getTitle() }} -- </td>
     </tr>
   </tbody>
 </table>
