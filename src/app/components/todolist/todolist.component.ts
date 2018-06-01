@@ -45,7 +45,9 @@ export class TodolistComponent implements OnInit {
 
   public delete(todo: Todo):void {
     console.log("Bouton delete clicked");
-    this._api.deleteTodo(todo.idTodo);
+    this._api.deleteTodo(todo.idTodo).subscribe(
+      (data) => {}
+    );
     let index = this.todos.indexOf(todo);
     this.todos.splice(index, 1);
   }
