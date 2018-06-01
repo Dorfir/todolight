@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   public pageTitle = 'Todo Light';
   private _todo: Todo;
 
+
+
   /**
    * Groupe de champs du formulaire
    */
@@ -41,22 +43,29 @@ export class AppComponent implements OnInit {
    * Méthode invoquée immédiatement après l'instanciation de l'objet
    */
   public ngOnInit(): void {
+    this._makeForm();
+  }
+
+  private _makeForm(todo: Todo = null): void {
+    if (todo == null) {
+      todo = new Todo();
+    }
     this.todoForm = this.formBuilder.group({
       title: [
-        '',
+        todo.getTitle(),
         [
           Validators.required,
           Validators.minLength(5)
         ]
       ],
       beginDate: [
-        '',
+        todo.getDebut().format('YYYY-MM-DD'),
         [
           Validators.required
         ]
       ],
       endDate: [
-        '',
+        todo.getFin().format('YYYY-MM-DD'),
         [
           Validators.required
         ]
@@ -65,11 +74,32 @@ export class AppComponent implements OnInit {
   }
 
   public formSubmit(): void {
-    this._api.addTodo(this.todoForm.value).subscribe(
-      (data) => {
-        this._api.sendTodo(new Todo().deserialize(data[0]));
-      }
-    );
+    if (this.texteBouton === "Ajouter") {
+      this._api.addTodo(this.todoForm.value).subscribe(
+        (data) => {
+          this._api.sendTodo(new Todo().deserialize(data[0]));
+        }
+      );
+    } else {
+      this.texteBouton = "Ajouter";
+      /*
+      this._api.updateTodos(this.idTodo, this.todoForm.value).subscribe(
+        (data) => {
+          this._api.sendTodo(new Todo().deserialize(data[0]));
+        }
+      );
+      */
+    }
+    
     
   }
+
+  public texteBouton = "Ajouter";
+
+  public receiveTodo(todo: Todo) {
+    console.log("Receive recu: "+ JSON.stringify(todo));
+    this._makeForm(todo); 
+    this.texteBouton = "Modifier";
+  }
+
 }

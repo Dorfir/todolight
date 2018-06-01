@@ -1,13 +1,25 @@
 <table class="table table-condensed table-striped">
   <thead>
     <tr>
-      <th>Liste des todos</th>
+      <th>Titre</th>
+      <th>Début</th>
+      <th>Fin</th>
+      <th>Éditer</th>
+      
     </tr>
   </thead>
 
   <tbody>
     <tr *ngFor="let todo of todos">
-      <td>{{ todo.getTitle() }} -- </td>
+      <td>{{ todo.getTitle() }} </td>
+      <td>{{ todo.getDebut() | amDateFormat:'DD/MM/YYYY' }}</td>
+      <td>{{ todo.getFin() | amDateFormat:'DD/MM/YYYY' }}</td>
+      <td>
+        <button mat-icon-button (click)="load(todo)">
+          <mat-icon>description</mat-icon>
+        </button>
+
+      </td>
     </tr>
   </tbody>
 </table>

@@ -1,9 +1,11 @@
+import * as moment from "moment";
+
 export class Todo {
 
-  public id: number;
+  public idTodo: number;
   public title: string;
-  public debut: any;
-  public fin: any;
+  public beginDate: any;
+  public endDate: any;
 
   public constructor() {}
 
@@ -31,6 +33,14 @@ export class Todo {
   public deserialize(input: any): Todo {
     Object.assign(this, input);
     return this;
+  }
+
+  public getDebut(): moment.Moment {
+    return moment(this.beginDate, 'YYYY-MM-DD');
+  }
+
+  public getFin(): moment.Moment {
+    return moment(this.endDate, 'YYYY-MM-DD');
   }
 
   public persist(): void {

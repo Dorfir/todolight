@@ -12,7 +12,7 @@
           type="text"
           formControlName="title"
           id="title"
-        >
+        />
       </div>
       <div class="alert alert-warning"
         *ngIf="title.invalid && title.touched">
@@ -35,7 +35,7 @@
           type="date"
           formControlName="beginDate"
           id="beginDate"
-        >
+        />
       </div>
       <div class="alert alert-warning"
         *ngIf="beginDate.invalid && beginDate.touched">
@@ -71,7 +71,7 @@
           'btn': true,
           'btn-outline-primary': true
         }">
-          Ajouter
+          {{texteBouton}}
       </button>
     </div>
   </form>
@@ -82,6 +82,6 @@
 </div>
 
 <div class="container">
-  <app-todolist></app-todolist>
+  <app-todolist (loadTodo)="receiveTodo($event)"></app-todolist>
 </div>
 
