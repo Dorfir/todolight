@@ -5,7 +5,7 @@
       <th>Début</th>
       <th>Fin</th>
       <th>Éditer</th>
-      
+      <th>Supprimer</th>
     </tr>
   </thead>
 
@@ -18,7 +18,11 @@
         <button mat-icon-button (click)="load(todo)">
           <mat-icon>description</mat-icon>
         </button>
-
+      </td>
+      <td>
+        <button mat-icon-button (click)="delete(todo)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </td>
     </tr>
   </tbody>

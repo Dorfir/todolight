@@ -12,6 +12,7 @@ import { Constants } from './constants/constants';
 export class AppComponent implements OnInit {
   public pageTitle = 'Todo Light';
   private _todo: Todo;
+  private _updateMode = false;
 
 
 
@@ -74,7 +75,7 @@ export class AppComponent implements OnInit {
   }
 
   public formSubmit(): void {
-    if (this.texteBouton === "Ajouter") {
+    if (!this._updateMode) {
       this._api.addTodo(this.todoForm.value).subscribe(
         (data) => {
           this._api.sendTodo(new Todo().deserialize(data[0]));
@@ -82,13 +83,14 @@ export class AppComponent implements OnInit {
       );
     } else {
       this.texteBouton = "Ajouter";
-      /*
-      this._api.updateTodos(this.idTodo, this.todoForm.value).subscribe(
+      this._updateMode = false;
+      this._api.updateTodos(this._todo.idTodo, this.todoForm.value).subscribe(
         (data) => {
-          this._api.sendTodo(new Todo().deserialize(data[0]));
+          this._todo = new Todo().deserialize(data);
+          this._api.sendTodo(this._todo);
         }
       );
-      */
+      
     }
     
     
@@ -98,8 +100,10 @@ export class AppComponent implements OnInit {
 
   public receiveTodo(todo: Todo) {
     console.log("Receive recu: "+ JSON.stringify(todo));
+    this._updateMode = true;
     this._makeForm(todo); 
     this.texteBouton = "Modifier";
+    this._todo = todo;
   }
 
 }
